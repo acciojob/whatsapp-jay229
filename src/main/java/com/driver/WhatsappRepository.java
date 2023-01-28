@@ -33,7 +33,7 @@ public class WhatsappRepository {
             return "Error";
         }
         userData.put(mobile,new User(name,mobile));
-        return "Success";
+        return "SUCCESS";
 
 
     }
@@ -100,7 +100,7 @@ public class WhatsappRepository {
         if (!isValidUser(group,user))
             throw new Exception("User is not a participant");
         adminMap.put(group,user);
-        return "Success";
+        return "SUCCESS";
 
 
 
