@@ -69,22 +69,23 @@ public class WhatsappRepository {
         //If the message is sent successfully, return the final number of messages in that group.
         if(!groupUserMap.containsKey(group))
             throw new Exception("Group does not exist");
-        if (this.isValidUser(group,sender)==false){
+        if (!this.isValidUser(group,sender)){
             throw new Exception("You are not allowed to send message");
         }
         List<Message>messages=new ArrayList<>();
-        messages=groupMessageMap.get(group);
+        if(groupMessageMap.containsKey(group))
+            messages=groupMessageMap.get(group);
         messages.add(message);
         groupMessageMap.put(group,messages);
         return messages.size();
 
     }
     public boolean isValidUser(Group group,User sender){
-        List<User> users=groupUserMap.get(group);
-        for (User user:users){
-            if (user.equals(sender))
-                return true;
+        List<User> users = groupUserMap.get(group);
+        for(User user: users) {
+            if(user.equals(sender)) return true;
         }
+
         return false;
     }
     public String changeAdmin(User approver, User user, Group group) throws Exception{
